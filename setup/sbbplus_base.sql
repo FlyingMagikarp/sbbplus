@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 08. Mrz 2019 um 19:43
+-- Erstellungszeit: 08. Mrz 2019 um 22:56
 -- Server-Version: 10.1.9-MariaDB
 -- PHP-Version: 5.6.15
 
@@ -69,6 +69,14 @@ CREATE TABLE `materialtype` (
   `Type` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `materialtype`
+--
+
+INSERT INTO `materialtype` (`ID`, `Type`) VALUES
+(1, 'Lokomotive'),
+(2, 'Wagen');
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +88,14 @@ CREATE TABLE `role` (
   `ID` int(11) NOT NULL,
   `Role` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `role`
+--
+
+INSERT INTO `role` (`ID`, `Role`) VALUES
+(1, 'Lokomotivführer'),
+(2, 'Kontrolleur');
 
 -- --------------------------------------------------------
 
@@ -118,7 +134,7 @@ CREATE TABLE `worker` (
   `WorkerNr` int(11) NOT NULL,
   `Firstname` text NOT NULL,
   `Lastname` text NOT NULL,
-  `Role` int(11) NOT NULL,
+  `Role` text NOT NULL,
   `Absent` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,12 +202,12 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT für Tabelle `materialtype`
 --
 ALTER TABLE `materialtype`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `role`
 --
 ALTER TABLE `role`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `route`
 --

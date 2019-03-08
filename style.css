@@ -1,25 +1,8 @@
-.workerNewLists {
-    list-style-type: none;
+.glyph {
+    width: 16px;
+    height: 16px;
 }
 
-.trainNewLists {
-    list-style-type: none;
-}
-
-.icon {
-    width: 20px;
-    height: 20px;
-}
-
-.submitIcn {
-    width: 20px;
-    height: 20px;
-}
-
-.wrapper {
-    width: 100vh;
-}
-
-.fullwidth {
-    width: 100%;
+form>div>input, form>div>select {
+    width: 250px !important;
 }

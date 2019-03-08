@@ -11,7 +11,7 @@ function getNavbar(){
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Personal</a>
+                    <a class="nav-link" href="/sbbplus/View/View_WorkerOverview.php">Personal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Material</a>

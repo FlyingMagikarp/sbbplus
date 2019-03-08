@@ -1,7 +1,6 @@
 <?php
 include 'res/head.php';
 include 'View/Nav.php';
-require 'Model/Model.php';
 ?>
 <html>
 <head>
@@ -11,9 +10,10 @@ require 'Model/Model.php';
     <div>
         <?php echo getNavbar(); ?>
     </div>
-    <div class="wrapper">
+    <div class="container-fluid">
         <div class="col-md-12" align="center">
-            <button type="button" class="btn btn-dark">Zeitplan generieren</button>
+            <br>
+            <a class="btn btn-dark" href="#" role="button">Zeitplan generieren</a>
         </div>
     </div>
 <?php include 'res/js.php'; ?>

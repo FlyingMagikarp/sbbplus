@@ -9,7 +9,7 @@ class Model_Worker
     public $role;
     public $absent;
 
-    public function __construct($workerID,$firstname,$lastname,$role,$absent,$id=0){
+    public function __construct($workerID,$firstname,$lastname,$role,$absent=false,$id=0){
         $this->id = $id;
         $this->workerID = $workerID;
         $this->firstname = $firstname;
