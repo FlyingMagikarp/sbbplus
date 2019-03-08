@@ -1,0 +1,25 @@
+.workerNewLists {
+    list-style-type: none;
+}
+
+.trainNewLists {
+    list-style-type: none;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.submitIcn {
+    width: 20px;
+    height: 20px;
+}
+
+.wrapper {
+    width: 100vh;
+}
+
+.fullwidth {
+    width: 100%;
+}
