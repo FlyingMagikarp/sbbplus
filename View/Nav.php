@@ -14,13 +14,13 @@ function getNavbar(){
                     <a class="nav-link" href="/sbbplus/View/View_WorkerOverview.php">Personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Material</a>
+                    <a class="nav-link" href="/sbbplus/View/View_MaterialOverview.php">Material</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Linien</a>
+                    <a class="nav-link" href="/sbbplus/View/View_RouteOverview.php">Linien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Stationen</a>
+                    <a class="nav-link" href="/sbbplus/View/View_StationOverview.php">Stationen</a>
                 </li>
             </ul>
         </div>

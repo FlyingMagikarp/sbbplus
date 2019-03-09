@@ -18,9 +18,7 @@ include 'View/Nav.php';
         <div class="col-md-3" >
             <h1>TODO List</h1>
             <ul class="list-group">
-                <li class="list-group-item">add, delete material</li>
                 <li class="list-group-item">add delete routes</li>
-                <li class="list-group-item">add delete stations</li>
                 <li class="list-group-item">modify routes with stations</li>
                 <li class="list-group-item">generate Timetable</li>
                 <li class="list-group-item">calc trains & workers</li>

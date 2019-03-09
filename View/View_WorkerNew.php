@@ -58,8 +58,6 @@ function check_input($data) {
     <div class="row">
     <div class="col-md-5 col-sm-12" >
         <br>
-        <div><a class="btn btn-dark" href="View_WorkerNew.php" role="button">Arbeiter erfassen</a></div>
-        <br>
         <form name="newWorker" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
             <div class="form-group">
                 <label for="workerId">Personalnummer</label>
