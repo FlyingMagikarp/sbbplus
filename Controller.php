@@ -37,6 +37,11 @@ class Controller{
         $this->model->updateAbsent($val,$id);
     }
 
+    // deletes worker using ID
+    public function deleteWorker($id){
+        $this->model->deleteWorker($id);
+    }
+
     // returns an array with all possible roles
     public function getRoles(){
         $dataDB = $this->model->getRoles();

@@ -26,8 +26,8 @@ public function dbConnection(){
 public function getWorkers(){
     $conn = $this->dbConnection();
 
-    $query  = "SELECT * FROM Worker;";
-    $results = $conn->query($query);
+    $sql  = "SELECT * FROM Worker;";
+    $results = $conn->query($sql);
 
     return $results;
 }
@@ -57,12 +57,20 @@ public function updateAbsent($val, $id){
     $conn->close();
 }
 
+// deletes worker
+public function deleteWorker($id){
+    $conn = $this->dbConnection();
+
+    $sql = "DELETE FROM Worker WHERE ID = '".$id."';";
+    $conn->query($sql);
+}
+
 // gets all roles
 public function getRoles(){
     $conn = $this->dbConnection();
 
-    $query = "SELECT * FROM Role";
-    $results = $conn->query($query);
+    $sql = "SELECT * FROM Role";
+    $results = $conn->query($sql);
 
     return $results;
 }

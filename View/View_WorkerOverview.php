@@ -21,15 +21,28 @@ class View_WorkerOverview
     public function updateAbsent($val, $id){
         $this->controller->updateAbsent($val,$id);
     }
+
+    // deletes worker using id
+    public function deleteWorker($id){
+        $this->controller->deleteWorker($id);
+    }
 }
 $self = new View_WorkerOverview();
 $workerData = $self->getWorkers();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if($_POST['set'] == 'true'){
-        $self->updateAbsent(true,$_POST['id']);
-    } elseif($_POST['set'] == 'false') {
-        $self->updateAbsent(false,$_POST['id']);
+    if(isset($_POST['set'])) {
+        if ($_POST['set'] == 'true') {
+            $self->updateAbsent(true, $_POST['id']);
+        } elseif ($_POST['set'] == 'false') {
+            $self->updateAbsent(false, $_POST['id']);
+        }
+    }
+
+    if(isset($_POST['delete'])) {
+        if ($_POST['delete'] == 'true') {
+            $self->deleteWorker($_POST['id']);
+        }
     }
 
     header("Location: View_WorkerOverview.php");
@@ -57,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th scope="col">Nachname</th>
                     <th scope="col">Position</th>
                     <th scope="col">Anwesend</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,6 +93,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input name="id" value="<?php echo $workerData[$i]->id ?>" hidden><input name="set" value="false" hidden><button type="submit" class="btn btn-sm btn-dark">Change</button>
                             </form>
                         <?php endif; ?>
+                    </td>
+                    <td>
+                        <form name="deleteWorker" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+                            <input name="id" value="<?php echo $workerData[$i]->id ?>" hidden><input name="delete" value="true" hidden><button type="submit" class="btn btn-sm btn-white" onclick="return confirm('Are you sure?');"><img class="glyph" src="/sbbplus/Res/Glyph/svg/si-glyph-trash.svg"></button>
+                        </form>
                     </td>
                 </tr>
                 <?php endfor; ?>
