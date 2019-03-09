@@ -1,0 +1,8 @@
+.glyph {
+    width: 16px;
+    height: 16px;
+}
+
+form>div>input, form>div>select {
+    width: 250px !important;
+}
