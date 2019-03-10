@@ -103,6 +103,16 @@ class Controller{
         return $dataArray;
     }
 
+    // gets Route name using ID
+    public function getRouteName($routeId){
+        $dataDB = $this->model->getRouteName($routeId);
+        $data = "";
+        while($row = $dataDB->fetch_assoc()){
+            $data = $row['Name'];
+        }
+        return $data;
+    }
+
     // deletes Route using ID
     public function deleteRoute($id){
         $this->model->deleteRoute($id);
@@ -148,5 +158,39 @@ class Controller{
     // adds Station using Model_Station Object
     public function addStation($station){
         $this->model->addStation($station);
+    }
+
+    // gets station using ID
+    public function getStationById($id){
+        $dataDB = $this->model->getStationById($id);
+        $station = 0;
+        while($row = $dataDB->fetch_assoc()){
+            $station = new Model_Station($row['Name'],$row['Wait'],$row['ID']);
+        }
+        return $station;
+    }
+
+
+    //Connection
+    // gets all Connections using Route ID
+    public function getConnections($routeID){
+        $dataDB = $this->model->getConnections($routeID);
+        $dataArray = array();
+        while($row = $dataDB->fetch_assoc()){
+            $fromStation = $this->getStationById($row['FromStation']);
+            $toStation = $this->getStationById($row['ToStation']);
+            $connection = new Model_Connection($row['RouteID'],$row['RoutePOS'],$fromStation,$toStation,$row['TravelTime'],$row['ID']);
+            array_push($dataArray,$connection);
+        }
+        return $dataArray;
+    }
+
+    public function getConnectionById($connectionId){
+        $dataDB = $this->model->getConnectionById($connectionId);
+        $connection = 0;
+        while($row = $dataDB->fetch_assoc()){
+            $connection = new Model_Connection($row['RouteID'],$row['RoutePOS'],$row['FromStation'],$row['ToStation'],$row['TravelTime'],$row['ID']);
+        }
+        return $connection;
     }
 }
