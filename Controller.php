@@ -108,6 +108,25 @@ class Controller{
         $this->model->deleteRoute($id);
     }
 
+    // adds Route and creates initial Connection
+    public function addRouteWithStation($routeName, $fromStationID, $toStationID, $travelTime){
+        $routeId = $this->addRoute($routeName);
+
+        //create connection
+        $connection = new Model_Connection($routeId,1,$fromStationID,$toStationID,$travelTime);
+        $this->model->addConnection($connection);
+    }
+
+    // adds Route and return RouteID
+    public function addRoute($name){
+        $dataDB = $this->model->addRoute($name);
+        $routeId = 0;
+        while($row = $dataDB->fetch_assoc()){
+            $routeId = $row['ID'];
+        }
+        return $routeId;
+    }
+
 
     //Station
     // gets all Stations
