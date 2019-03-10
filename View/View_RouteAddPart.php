@@ -47,6 +47,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $self = new View_RouteAddPart($connectionId,$routeId);
         echo '<pre>' , var_dump($self) , '</pre>'; die();
+
+        /*
+         * from here
+         * add new connection from old start to new
+         * add new connection from new to old end
+         *
+         * figure out how to change ROUTE POS
+         *
+         * delete old connection
+         *
+         * */
     }
 }
 ?>

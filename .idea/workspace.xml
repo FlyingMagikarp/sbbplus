@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e3967c3-065d-4a84-9f25-63361336a8c6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/View/View_RouteAddPart.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/View/View_RouteEdit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/View_RouteOverview.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/View_RouteOverview.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/View_RouteAddPart.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/View_RouteAddPart.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,8 +55,8 @@
       <file leaf-file-name="View_RouteAddPart.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/View/View_RouteAddPart.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="491">
+              <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -279,7 +273,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34025000" />
+    <option name="totallyTimeSpent" value="34188000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
@@ -655,8 +649,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/View/View_RouteAddPart.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        <state relative-caret-position="491">
+          <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
         </state>
       </provider>
     </entry>
