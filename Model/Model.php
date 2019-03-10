@@ -144,6 +144,30 @@ public function getRoutes(){
     return $results;
 }
 
+// adds route using route Name and returns it's ID
+public function addRoute($route){
+    $conn = $this->dbConnection();
+
+    $sql = "INSERT INTO Route(Name) VALUES ('".$route."')";
+
+    $conn->query($sql);
+
+    return $this->getLastRouteId();
+}
+
+// gets last inserted Route ID
+public function getLastRouteId(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT * FROM Route ORDER BY ID desc LIMIT 1";
+    $result = $conn->query($sql);
+
+    return $result;
+}
+
+
+// gets last inserted Route
+
 // deletes Route using ID
 // todo expand to cascade delete in Connection table
 public function deleteRoute($id){
@@ -152,6 +176,24 @@ public function deleteRoute($id){
     $sql = "DELETE FROM Route WHERE ID ='".$id."'";
     $conn->query($sql);
 }
+
+
+//Connection
+public function addConnection($connection){
+    $routeID = $connection->routeID;
+    $routePOS = $connection->routePos;
+    $fromStation = $connection->fromStation;
+    $toStation = $connection->toStation;
+    $travelTime = $connection->travelTime;
+
+    $conn = $this->dbConnection();
+
+    $sql = "INSERT INTO Connection(RouteID,RoutePOS,FromStation,ToStation,TravelTime) VALUES ('".$routeID."','".$routePOS."','".$fromStation."','".$toStation."','".$travelTime."')";
+    $conn->query($sql);
+
+    $conn->close();
+}
+
 
 // Stations
 // gets all Stations
