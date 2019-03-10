@@ -12,17 +12,24 @@ class View_RouteNew
         $this->controller = new Controller();
     }
 
-    public function  addRoute($route){
+    public function  addRoute($name, $fromStation, $toStation, $travelTime){
+        $this->controller->addRouteWithStation($name, $fromStation, $toStation, $travelTime);
+    }
 
+    public function getStations(){
+        return $this->controller->getStations();
     }
 }
 $self = new View_RouteNew();
+$stationData = $self->getStations();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
+    $fromStation = $_POST['fromStation'];
+    $toStation = $_POST['toStation'];
+    $travelTime = $_POST['travelTime'];
 
-    $route = new Model_RouteData($name);
-    $self->addRoute($route);
+    $self->addRoute($name, $fromStation, $toStation, $travelTime);
 
     header("Location: View_RouteOverview.php");
     exit();
@@ -45,6 +52,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="fromStation">Name</label>
+                    <select class="form-control" id="fromStation" name="fromStation">
+                        <?php for($i=0;$i<sizeof($stationData);$i++): ?>
+                        <option value="<?php echo $stationData[$i]->id; ?>"><?php echo $stationData[$i]->name; ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="travelTime">Reisedauer</label>
+                    <input type="text" class="form-control" id="travelTime" name="travelTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="toStation">Name</label>
+                    <select class="form-control" id="toStation" name="toStation">
+                        <?php for($i=0;$i<sizeof($stationData);$i++): ?>
+                            <option value="<?php echo $stationData[$i]->id; ?>"><?php echo $stationData[$i]->name; ?></option>
+                        <?php endfor; ?>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-dark">Submit</button>
             </form>
