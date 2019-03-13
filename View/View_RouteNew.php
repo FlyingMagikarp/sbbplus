@@ -12,8 +12,8 @@ class View_RouteNew
         $this->controller = new Controller();
     }
 
-    public function  addRoute($name, $fromStation, $toStation, $travelTime){
-        $this->controller->addRouteWithStation($name, $fromStation, $toStation, $travelTime);
+    public function  addRoute($name, $fromStation, $toStation, $travelTime, $config){
+        $this->controller->addRouteWithStation($name, $fromStation, $toStation, $travelTime, $config);
     }
 
     public function getStations(){
@@ -29,7 +29,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $toStation = $_POST['toStation'];
     $travelTime = $_POST['travelTime'];
 
-    $self->addRoute($name, $fromStation, $toStation, $travelTime);
+    $config = array();
+    $loks = $_POST['amountLok'];
+    $wag1 = $_POST['amountWag1'];
+    $wag2 = $_POST['amountWag2'];
+    array_push($config,$loks);
+    array_push($config,$wag1);
+    array_push($config,$wag2);
+
+    $self->addRoute($name, $fromStation, $toStation, $travelTime, $config);
 
     header("Location: View_RouteOverview.php");
     exit();
@@ -73,6 +81,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php endfor; ?>
                     </select>
                 </div>
+                <div class="from-group">
+                    <label for="amountLok">Anz. Lokomotiven</label>
+                    <input type="number" class="form-control" id="amountLok" name="amountLok" required>
+                </div>
+                <div class="from-group">
+                    <label for="amountWag1">Anz. Wagen 1. Klasse</label>
+                    <input type="number" class="form-control" id="amountWag1" name="amountWag1" required>
+                </div>
+                <div class="from-group">
+                    <label for="amountWag2">Anz. Wagen 2. Klasse</label>
+                    <input type="number" class="form-control" id="amountWag2" name="amountWag2" required>
+                </div>
+                <br>
                 <button type="submit" class="btn btn-dark">Submit</button>
             </form>
         </div>

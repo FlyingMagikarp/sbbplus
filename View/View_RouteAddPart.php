@@ -37,6 +37,18 @@ class View_RouteAddPart
         return $this->controller->getStations();
     }
 
+    public function increaseConnectionPos($pos){
+        $this->controller->increaseConnectionPos($pos,$this->routeId);
+    }
+
+    public function addConnection($connection){
+        $this->controller->addConnection($connection);
+    }
+
+    public function deleteConnection($connId){
+        $this->controller->deleteConnection($connId);
+    }
+
 
 }
 
@@ -46,18 +58,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connectionId = $_POST['connectionId'];
 
         $self = new View_RouteAddPart($connectionId,$routeId);
-        echo '<pre>' , var_dump($self) , '</pre>'; die();
+    }
 
-        /*
-         * from here
-         * add new connection from old start to new
-         * add new connection from new to old end
-         *
-         * figure out how to change ROUTE POS
-         *
-         * delete old connection
-         *
-         * */
+    if(isset($_POST['submitIn'])){
+        $routeId = $_POST['routeId'];
+        $oldConnectionId = $_POST['connectionId'];
+        $newStationId = $_POST['newStation'];
+        $fromToNewTime = $_POST['fromToNewTime'];
+        $newToEndTime = $_POST['newToEndTime'];
+        $newPos = (int)$self->originalConnection->routePos + 1;
+
+
+        $self = new View_RouteAddPart($oldConnectionId,$routeId);
+        //echo '<pre>' , var_dump($self) , '</pre>'; die();
+        $self->increaseConnectionPos($self->originalConnection->routePos);
+        $firstNewConn = new Model_Connection($self->routeId,$self->originalConnection->routePos,$self->originalStartStation->id,$newStationId,$fromToNewTime);
+        $secondNewConn = new Model_Connection($self->routeId,$newPos,$newStationId,$self->originalEndStation->id,$newToEndTime);
+        $self->addConnection($firstNewConn);
+        $self->addConnection($secondNewConn);
+        $self->deleteConnection($oldConnectionId);
+
+        header("Location: View_RouteOverview.php");
+        exit();
+
     }
 }
 ?>
@@ -73,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="col-md-8 col-sm-12">
         <br>
         <h2><?php echo $self->routeName ?></h2>
-        <form>
+        <form name="addPart" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
         <table class="table">
             <thead>
             <tr>
@@ -87,20 +110,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </thead>
             <tbody>
                 <tr>
-                    <td><input name="fromStationName" value="<?php echo "fromStation" ?>" readonly></td>
+                    <td><input name="fromStationName" value="<?php echo $self->originalStartStation->name ?>" readonly></td>
                     <td><input name="fromToNewTime"></td>
                     <td>
-                        <select class="form-control" id="newStation" name="newStation">
-                            <?php for($i=0;$i<5;$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                        <select id="newStation" name="newStation">
+                            <?php $allStations = $self->getAllStations(); ?>
+                            <?php for($i=0;$i<sizeof($allStations);$i++): ?>
+                                <option value="<?php echo $allStations[$i]->id ?>"><?php echo $allStations[$i]->name ?></option>
                             <?php endfor; ?>
                         </select>
                     </td>
-                    <td><input name="NewToEndTime"></td>
-                    <td><input name="toStation" value="<?php echo "toStation" ?>" readonly></td>
+                    <td><input name="newToEndTime"></td>
+                    <td><input name="toStation" value="<?php echo $self->originalEndStation->name ?>" readonly></td>
                 </tr>
             </tbody>
         </table>
+            <input name="connectionId" value="<?php echo $self->connectionId; ?>" hidden>
+            <input name="routeId" value="<?php echo $self->routeId; ?>" hidden>
+            <input name="submitIn" value="true" hidden>
         <button type="submit" class="btn btn-sm btn-dark">Speichern</button>
         </form>
     </div>

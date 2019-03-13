@@ -75,6 +75,24 @@ public function getRoles(){
     return $results;
 }
 
+public function getDriverAvailable(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT COUNT(*) AS total FROM Worker WHERE Role = 'Lokomotivführer' AND Absent = 0";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
+public function getCheckAvailable(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT COUNT(*) AS total FROM Worker WHERE Role = 'Kontrolleur' AND Absent = 0";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
 
 // Material
 // gets all Materials
@@ -133,6 +151,33 @@ public function getTypes(){
     return $results;
 }
 
+public function getAmtLoksAvailable(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT COUNT(*) AS total FROM Material WHERE Type = 0 AND Available = 1";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
+public function getAmtWag1Available(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT COUNT(*) AS total FROM Material WHERE Type = 1 AND Class = 1 AND Available = 1";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
+public function getAmtWag2Available(){
+    $conn = $this->dbConnection();
+
+    $sql = "SELECT COUNT(*) AS total FROM Material WHERE Type = 1 AND Class = 2 AND Available = 1";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
 // Routes
 // gets all Routes
 public function getRoutes(){
@@ -155,10 +200,11 @@ public function getRouteName($routeId){
 }
 
 // adds route using route Name and returns it's ID
-public function addRoute($route){
+public function addRoute($route,$configArr){
+    $config = implode('::',$configArr);
     $conn = $this->dbConnection();
 
-    $sql = "INSERT INTO Route(Name) VALUES ('".$route."')";
+    $sql = "INSERT INTO Route(Name, Configuration) VALUES ('".$route."','".$config."')";
 
     $conn->query($sql);
 
@@ -176,12 +222,13 @@ public function getLastRouteId(){
 }
 
 // deletes Route using ID
-// todo expand to cascade delete in Connection table
 public function deleteRoute($id){
     $conn = $this->dbConnection();
 
     $sql = "DELETE FROM Route WHERE ID ='".$id."'";
     $conn->query($sql);
+
+    $this->deleteConnectionUsingRoute($id);
 }
 
 
@@ -221,6 +268,42 @@ public function getConnectionById($connectionId){
 
     return $results;
 }
+
+// gets all connection that are bigger than POS
+public function getConnectionBiggerThanPos($pos,$routeId){
+    $conn = $this->dbConnection();
+
+    $sql  = "SELECT * FROM Connection WHERE RouteID = '".$routeId."' AND RoutePOS > '".$pos."' ORDER BY RoutePOS;";
+    $results = $conn->query($sql);
+
+    return $results;
+}
+
+// updates connection POS
+public function updateConnection($connection){
+    $id = $connection->id;
+    $routeId = $connection->routeID;
+
+    $conn = $this->dbConnection();
+    $sql = "UPDATE Connection SET RoutePOS = '".$routeId."' WHERE ID = '".$id."'";
+    $conn->query($sql);
+}
+
+// deletes Connection using ID
+public function deleteConnection($connectionId){
+    $conn = $this->dbConnection();
+
+    $sql = "DELETE FROM Connection WHERE ID = '".$connectionId."';";
+    $conn->query($sql);
+}
+
+// deletes Connection using RouteId
+    public function deleteConnectionUsingRoute($routeId){
+        $conn = $this->dbConnection();
+
+        $sql = "DELETE FROM Connection WHERE RouteID = '".$routeId."';";
+        $conn->query($sql);
+    }
 
 
 // Stations

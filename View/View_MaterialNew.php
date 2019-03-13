@@ -85,7 +85,7 @@ function check_input($data) {
                     <label for="type">Position</label>
                     <select class="form-control" id="type" name="type" required>
                         <?php for ($i=0;$i<sizeof($typeArr);$i++): ?>
-                            <option><?php echo $typeArr[$i] ?></option>
+                            <option value="<?php echo $i ?>"><?php echo $typeArr[$i] ?></option>
                         <?php endfor; ?>
                     </select>
                 </div>

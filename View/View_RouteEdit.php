@@ -9,11 +9,13 @@ class View_RouteEdit
     public $controller;
     public $routeId;
     public $routeName;
+    public $totalTravelTimeWithStops;
 
     public function __construct($routeId){
         $this->controller = new Controller();
         $this->routeId = $routeId;
         $this->routeName = $this->controller->getRouteName($routeId);
+        $this->totalTravelTimeWithStops = $this->calcTotalTravelTime();
     }
 
     public function getConnectionsFromRouteId(){
@@ -22,6 +24,10 @@ class View_RouteEdit
 
     public function getStationName(){
         return $this->controller;
+    }
+
+    public function calcTotalTravelTime(){
+        return $this->controller->calcTotalTravelTime($this->routeId);
     }
 
 }
@@ -45,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="col-md-12 col-sm-12">
         <br>
         <h2><?php echo $self->routeName ?></h2>
+        <h3>Streckendauer: <?php echo $self->totalTravelTimeWithStops ?></h3>
         <br>
         <h2>Teilstrecken</h2>
         <table class="table">

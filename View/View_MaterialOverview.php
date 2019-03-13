@@ -86,15 +86,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td><?php echo $materialData[$i]->class; ?></td>
                         <td><?php echo $materialData[$i]->space; ?></td>
                         <td>
-                            <?php if($materialData[$i]->available == false): ?>
+                            <?php if($materialData[$i]->available == true): ?>
                                 <form name="setAvailableTrue" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
                                     <img class="glyph" src="/sbbplus/Res/Glyph/svg/si-glyph-checked.svg"/>
-                                    <input name="id" value="<?php echo $materialData[$i]->id ?>" hidden><input name="set" value="true" hidden><button type="submit" class="btn btn-sm btn-dark">Change</button>
+                                    <input name="id" value="<?php echo $materialData[$i]->id ?>" hidden><input name="set" value="false" hidden><button type="submit" class="btn btn-sm btn-dark">Change</button>
                                 </form>
                             <?php else: ?>
                                 <form name="setAvailableFalse" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
                                     <img class="glyph" src="/sbbplus/Res/Glyph/svg/si-glyph-delete.svg"/>
-                                    <input name="id" value="<?php echo $materialData[$i]->id ?>" hidden><input name="set" value="false" hidden><button type="submit" class="btn btn-sm btn-dark">Change</button>
+                                    <input name="id" value="<?php echo $materialData[$i]->id ?>" hidden><input name="set" value="true" hidden><button type="submit" class="btn btn-sm btn-dark">Change</button>
                                 </form>
                             <?php endif; ?>
                         </td>

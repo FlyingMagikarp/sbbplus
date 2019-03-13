@@ -97,7 +97,8 @@ class Controller{
         $dataDB = $this->model->getRoutes();
         $dataArray = array();
         while($row = $dataDB->fetch_assoc()){
-            $route = new Model_RouteData($row['Name'], $row['ID']);
+            $config = explode('::',$row['Configuration']);
+            $route = new Model_RouteData($row['Name'], $row['ID'], $config);
             array_push($dataArray,$route);
         }
         return $dataArray;
@@ -119,8 +120,8 @@ class Controller{
     }
 
     // adds Route and creates initial Connection
-    public function addRouteWithStation($routeName, $fromStationID, $toStationID, $travelTime){
-        $routeId = $this->addRoute($routeName);
+    public function addRouteWithStation($routeName, $fromStationID, $toStationID, $travelTime, $config){
+        $routeId = $this->addRoute($routeName, $config);
 
         //create connection
         $connection = new Model_Connection($routeId,1,$fromStationID,$toStationID,$travelTime);
@@ -128,8 +129,8 @@ class Controller{
     }
 
     // adds Route and return RouteID
-    public function addRoute($name){
-        $dataDB = $this->model->addRoute($name);
+    public function addRoute($name,$config){
+        $dataDB = $this->model->addRoute($name,$config);
         $routeId = 0;
         while($row = $dataDB->fetch_assoc()){
             $routeId = $row['ID'];
@@ -185,6 +186,15 @@ class Controller{
         return $dataArray;
     }
 
+    public function addConnection($connection){
+        $this->model->addConnection($connection);
+    }
+
+    public function deleteConnection($connectionId){
+        $this->model->deleteConnection($connectionId);
+    }
+
+    // gets a connection using ID
     public function getConnectionById($connectionId){
         $dataDB = $this->model->getConnectionById($connectionId);
         $connection = 0;
@@ -192,5 +202,73 @@ class Controller{
             $connection = new Model_Connection($row['RouteID'],$row['RoutePOS'],$row['FromStation'],$row['ToStation'],$row['TravelTime'],$row['ID']);
         }
         return $connection;
+    }
+
+    // increases all ConnectionsPOS by 1
+    public function increaseConnectionPos($pos,$routeId){
+        $connectionArr = $this->getConnectionBiggerThanPos($pos,$routeId);
+        for($i=0;$i<sizeof($connectionArr);$i++){
+            $this->model->updateConnection($connectionArr[$i]);
+        }
+    }
+
+    //gets all connections bigger than pos and increases POS by 1
+    public function getConnectionBiggerThanPos($pos,$routeId){
+        $dataDB = $this->model->getConnectionBiggerThanPos($pos,$routeId);
+        $dataArray = array();
+        while($row = $dataDB->fetch_assoc()){
+            $newPos = (int)$row['RoutePOS'] + 1;
+            $connection = new Model_Connection($row['RouteID'],$newPos,$row['FromStation'],$row['ToStation'],$row['TravelTime'],$row['ID']);
+            array_push($dataArray,$connection);
+        }
+        return $dataArray;
+    }
+
+
+    // calcs total travel time
+    public function calcTotalTravelTime($routeId){
+        $connectionsArr = $this->getConnections($routeId);
+        $travelTime = 0;
+        for($i=0;$i<sizeof($connectionsArr);$i++){
+            $travelTime += (int)$connectionsArr[$i]->travelTime;
+            $travelTime += (int)$connectionsArr[$i]->toStation->wait;
+        }
+        $travelTime -= (int)$connectionsArr[$i-1]->toStation->wait;
+        return $travelTime;
+    }
+
+
+    public function getAmtLoksAvailable(){
+        $dataDB = $this->model->getAmtLoksAvailable();
+        $data=mysqli_fetch_assoc($dataDB);
+        return $data['total'];
+    }
+
+
+    public function getAmtWag1Available(){
+        $dataDB = $this->model->getAmtWag1Available();
+        $data=mysqli_fetch_assoc($dataDB);
+        return $data['total'];
+    }
+
+
+    public function getAmtWag2Available(){
+        $dataDB = $this->model->getAmtWag2Available();
+        $data=mysqli_fetch_assoc($dataDB);
+        return $data['total'];
+    }
+
+
+    public function getDriverAvailable(){
+        $dataDB = $this->model->getDriverAvailable();
+        $data=mysqli_fetch_assoc($dataDB);
+        return $data['total'];
+    }
+
+
+    public function getCheckAvailable(){
+        $dataDB = $this->model->getCheckAvailable();
+        $data=mysqli_fetch_assoc($dataDB);
+        return $data['total'];
     }
 }
