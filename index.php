@@ -13,16 +13,10 @@ include 'View/Nav.php';
     <div class="container-fluid" align="center">
         <div class="col-md-12" align="center">
             <br>
-            <a class="btn btn-dark" href="#" role="button">Zeitplan generieren</a>
-        </div>
-        <div class="col-md-3" >
-            <h1>TODO List</h1>
-            <ul class="list-group">
-                <li class="list-group-item">add edit buttons to routeoverview, look at delete form thingy and use that</li>
-                <li class="list-group-item">modify routes with stations</li>
-                <li class="list-group-item">generate Timetable</li>
-                <li class="list-group-item">calc trains & workers</li>
-            </ul>
+            <a class="btn btn-dark" href="View/View_Timetable.php" role="button">Zeitplan generieren</a>
+            <br>
+            <br>
+            <a class="btn btn-dark" href="View/View_MaterialCheck.php" role="button">Material Prüfen</a>
         </div>
     </div>
 <?php include 'res/js.php'; ?>

@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
+                <th scope="col">Bearbeiten</th>
                 <th></th>
             </tr>
             </thead>
@@ -62,7 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td><?php echo $routeData[$i]->id; ?></td>
                         <td><?php echo $routeData[$i]->name; ?></td>
                         <td>
-                            <form name="deleteMaterial" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+                            <form name="editRoute" action="View_RouteEdit.php" method="post">
+                                <input name="id" value="<?php echo $routeData[$i]->id ?>" hidden><input name="edit" value="true" hidden><button type="submit" class="btn btn-sm btn-white"><img class="glyph" src="/sbbplus/Res/Glyph/svg/si-glyph-pencil.svg"></button>
+                            </form>
+                        </td>
+                        <td>
+                            <form name="deleteRoute" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
                                 <input name="id" value="<?php echo $routeData[$i]->id ?>" hidden><input name="delete" value="true" hidden><button type="submit" class="btn btn-sm btn-white" onclick="return confirm('Are you sure?');"><img class="glyph" src="/sbbplus/Res/Glyph/svg/si-glyph-trash.svg"></button>
                             </form>
                         </td>
