@@ -1,0 +1,33 @@
+Titel
+
+Aufgabenstellung
+Lastenheft
+Abgrenzungen?
+
+Projektorganisation/Projektrollen
+
+Organisation/Arbeitsmittel
+Github
+
+Zeitplan
+
+
+
+PROJEKTDOKU
+
+Initialisierung
+- ist zustan
+- problem
+- Projektziele
+- variantenentscheid
+- Risikoanalyse
+- 
+
+Detailkonzept
+- UML stuff
+- 
+
+Testkonzept
+
+
+Realisierung
