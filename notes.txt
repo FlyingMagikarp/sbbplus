@@ -1,0 +1,80 @@
+Titel
+
+
+
+Aufgabenstellung
+
+Lastenheft
+
+	Anforderungen
+	- Datenverwaltung Material
+	- Datenverwaltung Personen
+	- Datenverwaltung Stationen
+	- Datenverwaltung Routen
+	- Verändern von Routen, mehr stationen
+	- fahrplan berechnung
+	- material prüfungen
+
+Abgrenzungen?
+	- von beiden endpunkten wird gestarten
+	- keine Ferien/humane zeiten
+
+
+
+Projektorganisation/Projektrollen
+
+	- auftraggeber graber
+
+
+Organisation/Arbeitsmittel
+
+	- entwicklung auf mac & windows pc
+	- XAMP/intellij
+
+Zeitplan
+
+
+
+
+	- excel
+	- fazit. alles ok paar verschiebungen aber genug puffer
+
+PROJEKTDOKU
+
+
+
+Initialisierung
+
+- ist zustand
+	- aus auftrag
+- problem
+
+	- aus auftrag
+- Projektziele
+
+	- aus auftrag
+- variantenentscheid
+
+	- c#
+	- java
+	- php/xamp stack X
+
+	- diagramm?
+- Risikoanalyse
+
+	- siehe herren/graber	
+Detailkonzept
+
+- UML stuff
+
+	- sequenz für nicht crud(fahrplan,linien)
+
+Testkonzept
+- manuelle tets
+- test cases für alle use cases + vllt mehr
+
+
+
+Realisierung
+- beschreibung fahrplan berechnung
+- beschreibung check berechnung
