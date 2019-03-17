@@ -78,3 +78,15 @@ Testkonzept
 Realisierung
 - beschreibung fahrplan berechnung
 - beschreibung check berechnung
+
+
+
+Risikoanalyse
+UseCases
+Sqeuenzdiagramme
+Klassendiagramme
+ERD
+Teskonzept
+Testfälle
+Ergebnisse
+Realisierung x3
